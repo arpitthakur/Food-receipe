@@ -1,9 +1,10 @@
 import React from "react";
+import Home from "./Pages/Home";
 
 const App = () => {
   return (
   <>
-    <h1>helghlhto</h1>
+    <Home />
   </>
   )
 };
