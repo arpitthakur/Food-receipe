@@ -1,35 +1,48 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Axios from "axios";
+import { useEffect, useState } from "react";
+import Search from "../Components/Search";
 
 function Home() {
   const [products, setProducts] = useState([]); //create state for Data setup
-  console.log("data", products);
+  const [searchproducts, setSearchProducts] = useState([]);
 
   useEffect(() => {
     api_products();
   }, []);
-  //Data from API
+
   const api_products = async () => {
     const data = await Axios.get("https://fakestoreapi.com/products");
-    console.log("data2", data);
-    setProducts(data.data); 
-
+    setProducts(data.data);
+    setSearchProducts(data.data)
   };
+
+
 
   return (
     <>
-      <div>
-        {products?.map((item, i) => (
+      {/* Header Component */}
+      <Search
+        searchproducts={searchproducts}
+        setSearchProducts={setSearchProducts}
+        products={products}
+        setProducts={setProducts}
+      />
+      {/* Header Component */}
 
-          <h1 className="text-black" key={i}> 
-          <div>
-           <img src = {item.image}></img>
-          </div>
-          {item.price}</h1>
-
-        ))}
-
-
+      <div className="container">
+        <div className="row">
+          {products?.map((item, i) => (
+            <div className="col-4">
+              <img style={{ width: "100px" }} key={i} src={item.image}></img>
+              <h1 style={{ fontSize: "20px" }}>{item.title}</h1>
+              <h1 className="text-black" style={{ fontSize: "16px" }}>
+                {" "}
+                {item.price}
+              </h1>
+            </div>
+          ))}
+        </div>
       </div>
     </>
   );
