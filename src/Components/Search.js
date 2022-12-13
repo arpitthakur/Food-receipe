@@ -39,8 +39,14 @@ const [search,setSearch] =useState("")
           <button
             type="button"
             className="btn btn-primary rounded-pill mx-1 px-3"
+             onClick={()=>{
+              console.log("clicked")
+              props.setshowTab(true)
+              
+              }}
           >
-            <b>Favourite</b>
+            <b
+              >Favourite</b>
           </button>
         </div>
       </div>
